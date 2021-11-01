@@ -64,7 +64,7 @@ RUN dpkg-deb --build hyperion-docker_1.0-1
 
 FROM debian:sid-slim
 
-RUN apt-get update && apt-get install -y --no-install-recommends screen procps vim sudo wget gnupg2 apt-transport-https ca-certificates curl 
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends screen procps htop vim sudo wget gnupg2 apt-transport-https ca-certificates curl 
 
 COPY --from=build-stage /build/hyperion-docker_1.0-1.deb /
 

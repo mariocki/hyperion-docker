@@ -2,11 +2,11 @@
 See https://github.com/SDL-Hercules-390/hyperion
 ## Building
 
-`docker build -t mariocki/hyperion-docker:1.0 .`
+`docker compose build`
 
 ## Running
 
-`docker run -p 3270:3270 --rm -itd -v ~/tk4-docker:/tk4 mariocki/hyperion-docker:1.0`
+`docker compose up -d`
 
 ## Logging in
 Start c3270 :
@@ -21,11 +21,11 @@ and the password is `CUL8TR`
 
 ## Shutting down
 
-Exit out of TSO then enter
+Exit out of TSO into the MVS console then enter
 
 ```
 shutdown
 logoff
 ```
 
-`Ctrl-n` brings up the mnu in c3270
+`Ctrl-n` brings up the menu in c3270
