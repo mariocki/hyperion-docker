@@ -72,8 +72,6 @@ RUN dpkg -i /hyperion-docker_1.0-1.deb
 
 RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/hercules
 
-RUN ldconfig
-
 RUN <<EOF cat >> /run.sh
 #!/bin/sh
 ldconfig
