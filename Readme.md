@@ -1,12 +1,14 @@
-# Building
+# Simple Dockerfile for the SDL-Labs' Hyperion-4 OS360 Emulator
+See https://github.com/SDL-Hercules-390/hyperion
+## Building
 
 `docker build -t mariocki/hyperion-docker:1.0 .`
 
-# Running
+## Running
 
 `docker run -p 3270:3270 --rm -itd -v ~/tk4-docker:/tk4 mariocki/hyperion-docker:1.0`
 
-# Logging in
+## Logging in
 Start c3270 :
 
 `c3270 localhost:3270`
@@ -17,7 +19,7 @@ Once connected:
 
 and the password is `CUL8TR`
 
-# Shutting down
+## Shutting down
 
 Exit out of TSO then enter
 
