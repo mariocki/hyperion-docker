@@ -7,6 +7,6 @@ services:
       dockerfile: Dockerfile
     image: mariocki/hyperion-docker:latest
     volumes:
-      - ~/tk4-docker:/tk4
+      - ~/tk4:/tk4
     ports:
       - "3270:3270"
