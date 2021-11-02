@@ -17,7 +17,7 @@ Download the latest verion of tk4- from http://wotho.ethz.ch/tk4-/ and extract i
 ## Logging in
 Start c3270 :
 
-`c3270 -model 5 localhost:3270`
+`c3270 -model 3279-5 -oversize auto localhost:3270`
 
 Once connected:
 
