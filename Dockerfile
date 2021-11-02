@@ -76,9 +76,14 @@ RUN <<EOF cat >> /run.sh
 #!/bin/sh
 ldconfig
 cd /tk4
+cat /dev/null > prt/prt002.txt
+cat /dev/null > prt/prt00e.txt
+cat /dev/null > prt/prt00f.txt
 ./mvs
 EOF
 
 RUN chmod +x /run.sh
 ENTRYPOINT ["/run.sh"]
 CMD []  
+
+EXPOSE 3270
