@@ -54,7 +54,8 @@ Reattaching to a session:
 ## Links
 * https://sdl-hercules-390.github.io/html/
 * https://kevindurant.be/2019/03/17/mom-part-1-setting-up-my-own-mainframe/
-* https://bsp-gmbh.pocnet.net/turnkey/cookbook/index.html
+* https://bsp-gmbh.pocnet.net/turnkey/cookbook/index.html [tk3 archive of site]
 * https://www.tutorialspoint.com/jcl/index.htm
-* http://wotho.ethz.ch/tk4-/
+* http://wotho.ethz.ch/tk4-/ [tk4- main site]
+* http://featherriver.net/gettingMVS.html [includes how to create a new user]
 
