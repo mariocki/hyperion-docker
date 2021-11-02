@@ -1,4 +1,4 @@
-# Simple Dockerfile for the SDL-Labs' Hyperion-4 OS360 Emulator
+# Simple Dockerfile for SDL-Labs' Hercules 4.x (Hyperion) System/370 and ESA/390 Emulator
 See https://github.com/SDL-Hercules-390/hyperion
 
 ## Installing the runtime
