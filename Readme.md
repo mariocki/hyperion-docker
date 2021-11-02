@@ -5,16 +5,14 @@ See https://github.com/SDL-Hercules-390/hyperion
 Download the latest verion of tk4- from http://wotho.ethz.ch/tk4-/ and extract it into ~/tk4
 
 ## If using docker compose
-### Building
-`docker compose build`
-### Running
-`docker compose up -d`
+### Building and running
+`docker compose up --build -d`
 
 ## If using docker
 ### Building
 `docker build -t mariocki/hyperion-docker:1.0 .`
 ### Running
-`docker run -p 3270:3270 --rm -itd -v ~/tk4:/tk4 mariocki/hyperion-docker:1.0`
+`docker run -p 3270:3270 -p 8038:8038 --rm -itd -v ~/tk4:/tk4 mariocki/hyperion-docker:1.0`
 
 ## Logging in
 Start c3270 :
@@ -26,6 +24,10 @@ Once connected:
 `logon HERC01` or `logon HERC02`
 
 and the password is `CUL8TR`
+
+## Web Console
+open a browser a nd go to
+`http://localhost:8038`
 
 ## Shutting down
 
@@ -50,6 +52,7 @@ Reattaching to a session:
 `logon <username> reconnect`
 
 ## Links
+* https://sdl-hercules-390.github.io/html/
 * https://kevindurant.be/2019/03/17/mom-part-1-setting-up-my-own-mainframe/
 * https://bsp-gmbh.pocnet.net/turnkey/cookbook/index.html
 * https://www.tutorialspoint.com/jcl/index.htm

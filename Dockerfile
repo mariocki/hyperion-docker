@@ -87,3 +87,4 @@ ENTRYPOINT ["/run.sh"]
 CMD []  
 
 EXPOSE 3270
+EXPOSE 8038
