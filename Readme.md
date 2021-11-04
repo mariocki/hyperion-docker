@@ -12,8 +12,9 @@ Download the latest verion of tk4- from http://wotho.ethz.ch/tk4-/ and extract i
 ### Building
 `docker build -t mariocki/hyperion-docker:1.0 .`
 ### Running
-`docker run -p 3270:3270 -p 8038:8038 --rm -itd -v ~/tk4:/tk4 mariocki/hyperion-docker:1.0`
+`docker run --cap-add=NET_ADMIN -p 3270:3270 -p 8038:8038 -p 21000:21000 --rm -itd -v ~/tk4:/tk4 mariocki/hyperion-docker:1.0`
 
+By default x3270 connects on port 3270, port 8038 is the Web console and 21000 is the FTP port (see below)
 ## Logging in
 Start c3270 :
 
@@ -48,9 +49,27 @@ logoff
 ## TIPS
 `Ctrl-n` brings up the menu in c3270
 
-Reattaching to a session:
-`logon <username> reconnect`
+Reattaching to a session in TSO console: `logon <username> reconnect`
 
+Starting FTP server,in the console run `/start ftpd,srvport=2100`
+
+What DASD devices are usable: `SYS1.SYSGEN.CNTL(IOGEN)`
+
+To mount a DASD manually
+
+```
+attach 250 3330 dasd/<<filename>
+/v 250,online
+/m 250,vol=(sl,<<Top Level DSN Name>>),use=private
+```
+or see http://www.jaymoseley.com/hercules/installMVS/addingDasdV7.htm
+
+To run a jcl file in the tk4/jcl folder, in the console run 
+`devinit 00c jcl/<<filename>> eof`
+
+## Algol68C
+Download from https://algol68c.bitbucket.io/370/Algol68C_Release_1.3039.html/
+Then follow instructions on https://jmvdveer.home.xs4all.nl/en.post.algol-68-mvs.html#install and https://jmvdveer.home.xs4all.nl/en.post.algol-68-mvs-revisited.html
 ## Links
 * https://sdl-hercules-390.github.io/html/
 * https://kevindurant.be/2019/03/17/mom-part-1-setting-up-my-own-mainframe/
@@ -58,4 +77,4 @@ Reattaching to a session:
 * https://www.tutorialspoint.com/jcl/index.htm
 * http://wotho.ethz.ch/tk4-/ [tk4- main site]
 * http://featherriver.net/gettingMVS.html [includes how to create a new user]
-
+* https://algol68c.bitbucket.io/370/Algol68C_Release_1.3039.html/ [Algol68C DASD and AWS tape image]
