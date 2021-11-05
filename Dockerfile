@@ -93,7 +93,7 @@ ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN <<EOF cat >> /run.sh
 #!/bin/bash
 ldconfig
-[[ ! -c /dev/net/tun ]] && { echo"creating tun"; mkdir -p /dev/net; mknod /dev/net/tun c 10 200; chmod +rw /dev/net/tun; }
+[[ ! -c /dev/net/tun ]] && { echo "creating tun"; mkdir -p /dev/net; mknod /dev/net/tun c 10 200; chmod +rw /dev/net/tun; }
 openvpn --mktun --dev tun
 cd /tk4
 cat /dev/null > prt/prt002.txt

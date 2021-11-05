@@ -7,7 +7,13 @@ services:
       dockerfile: Dockerfile
     image: mariocki/hyperion-docker:latest
     cap_add:
-      - NET_ADMIN
+      - ALL
+      #- MKNOD
+      #- NET_ADMIN
+      #- NET_BIND_SERVICE
+      #- NET_RAW
+      #- SYS_NICE
+      #- SYS_RAWIO
     volumes:
       - ~/tk4:/tk4
     ports:
