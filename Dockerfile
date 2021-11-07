@@ -22,23 +22,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   zlib1g-dev
 
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+
 WORKDIR /build
 
-RUN git clone https://github.com/SDL-Hercules-390/gists.git
+RUN git clone --depth 1 https://github.com/SDL-Hercules-390/gists.git
+RUN git clone --depth 1 https://github.com/SDL-Hercules-390/hyperion.git
 
 WORKDIR /build/gists
 
 RUN ./extpkgs.sh clone c d s t
 
-WORKDIR /build
-
-RUN git clone https://github.com/SDL-Hercules-390/hyperion.git
-
 WORKDIR /build/hyperion
 
 RUN ./configure --enable-extpkgs=/build/gists
 
-RUN make
+RUN make -j
 
 RUN mkdir -p /build/hyperion-docker_1.0-1
 
@@ -79,6 +78,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
   vim \
   wget 
 
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+
 COPY --from=build-stage /build/hyperion-docker_1.0-1.deb /
 
 RUN dpkg -i /hyperion-docker_1.0-1.deb
@@ -87,8 +88,6 @@ RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/hercules
 
 # enable ipv4 forwarding
 RUN sed 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
-
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 
 RUN <<EOF cat >> /run.sh
 #!/bin/bash
