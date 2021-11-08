@@ -6,17 +6,19 @@ See https://github.com/SDL-Hercules-390/hyperion
 Download the latest verion of tk4- from http://wotho.ethz.ch/tk4-/ and extract it into ~/tk4
 
 ### Building Hyperion
-These commands will use a Docker container to:
-1) download and build Hyperion
-2) generate a .deb file and copy that file to your local machine
-3) install that deb package on your local machine
+Just run `make`
+
+or to run manually:
+
 ```
 docker build -t mariocki/hyperion-docker .
 docker create -ti --name builder mariocki/hyperion-docker bash
 docker cp builder:/build/hyperion-docker_1.0-1.deb .
 docker rm -f builder
-sudo dpkg -i hyperion-docker_1.0-1.deb
 ```
+
+### Install
+`sudo dpkg -i hyperion-docker_1.0-1.deb`
 
 By default x3270 connects on port 3270, port 8038 is the Web console and 21000 is the FTP port (see below)
 ## Logging in
