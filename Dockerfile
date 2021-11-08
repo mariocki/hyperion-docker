@@ -22,11 +22,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   zlib1g-dev
 
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-
 WORKDIR /build
 
+ADD https://api.github.com/repos/SDL-Hercules-390/gists/git/refs/heads/master version.json
 RUN git clone --depth 1 https://github.com/SDL-Hercules-390/gists.git
+ADD https://api.github.com/repos/SDL-Hercules-390/hyperion/git/refs/heads/master version.json
 RUN git clone --depth 1 https://github.com/SDL-Hercules-390/hyperion.git
 
 WORKDIR /build/gists
@@ -37,7 +37,7 @@ WORKDIR /build/hyperion
 
 RUN ./configure --enable-extpkgs=/build/gists
 
-RUN make -j
+RUN make -j 2
 
 RUN mkdir -p /build/hyperion-docker_1.0-1
 
@@ -60,49 +60,3 @@ Description: Hyperion
 EOF
 
 RUN dpkg-deb --build hyperion-docker_1.0-1
-
-FROM debian:sid-slim
-
-RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
-  apt-transport-https \
-  bash \
-  ca-certificates \
-  curl \
-  gnupg2 \
-  htop \
-  net-tools \
-  openvpn \
-  procps \
-  screen \
-  sudo \
-  vim \
-  wget 
-
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-
-COPY --from=build-stage /build/hyperion-docker_1.0-1.deb /
-
-RUN dpkg -i /hyperion-docker_1.0-1.deb
-
-RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/hercules
-
-# enable ipv4 forwarding
-RUN sed 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
-
-RUN <<EOF cat >> /run.sh
-#!/bin/bash
-ldconfig
-[[ ! -c /dev/net/tun ]] && { echo "creating tun"; mkdir -p /dev/net; mknod /dev/net/tun c 10 200; chmod +rw /dev/net/tun; }
-openvpn --mktun --dev tun
-cd /tk4
-cat /dev/null > prt/prt002.txt
-cat /dev/null > prt/prt00e.txt
-cat /dev/null > prt/prt00f.txt
-./mvs
-EOF
-
-RUN chmod +x /run.sh
-ENTRYPOINT ["/run.sh"]
-CMD []  
-
-EXPOSE 3270 8038 21000

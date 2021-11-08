@@ -1,18 +1,22 @@
-# Simple Dockerfile for SDL-Labs' Hercules 4.x (Hyperion) System/370 and ESA/390 Emulator
+# Simple Dockerfile to build SDL-Labs' Hercules 4.x (Hyperion) System/370 and ESA/390 Emulator
+This Dockerfile can be used to simplify the building of hyperion from github and producde a .deb package which can then be used to install hyperion on Debian/Ubuntu.
 See https://github.com/SDL-Hercules-390/hyperion
 
 ## Installing the runtime
 Download the latest verion of tk4- from http://wotho.ethz.ch/tk4-/ and extract it into ~/tk4
 
-## If using docker compose
-### Building and running
-`docker compose up --build -d`
-
-## If using docker
-### Building
-`docker build -t mariocki/hyperion-docker:1.0 .`
-### Running
-`docker run --cap-add=NET_ADMIN -p 3270:3270 -p 8038:8038 -p 21000:21000 --rm -itd -v ~/tk4:/tk4 mariocki/hyperion-docker:1.0`
+### Building Hyperion
+These commands will use a Docker container to:
+1) download and build Hyperion
+2) generate a .deb file and copy that file to your local machine
+3) install that deb package on your local machine
+```
+docker build -t mariocki/hyperion-docker .
+docker create -ti --name builder mariocki/hyperion-docker bash
+docker cp builder:/build/hyperion-docker_1.0-1.deb .
+docker rm -f builder
+sudo dpkg -i hyperion-docker_1.0-1.deb
+```
 
 By default x3270 connects on port 3270, port 8038 is the Web console and 21000 is the FTP port (see below)
 ## Logging in
