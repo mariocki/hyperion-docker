@@ -53,7 +53,7 @@ Version: 1.0-1
 Section: base
 Priority: optional
 Architecture: amd64
-Depends: 
+Depends: libbz2-1.0, libzip4 
 Maintainer: Your Name <you@email.com>
 Description: Hyperion
  OS360 emulator from https://github.com/SDL-Hercules-390
