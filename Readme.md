@@ -75,9 +75,10 @@ or see http://www.jaymoseley.com/hercules/installMVS/addingDasdV7.htm
 To run a jcl file in the tk4/jcl folder, in the console run 
 `devinit 00c jcl/<<filename>> eof`
 
-### to kindof split printer output
+### Split printer output (kindof)
+```
 awk 'BEGIN { RS=""; f = "init.txt"; p=0 } /END   [A-Z]\*\*\*\*\n\f/ { p++ } { f = FILENAME "-page-" p ".txt" } { print > f }' prt00e.txt
-
+```
 ## Change Login Screen
 see jcl/netsol.jcl [from http://www.jaymoseley.com/hercules/faq/mvsfaq03.htm#SYSTEM020]
 
