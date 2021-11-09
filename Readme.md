@@ -53,6 +53,8 @@ logoff
 * IBMUSER / IBMPASS - fully authorized user without access to the RAKF users and profiles tables. This account is meant to be used for recovery purposes only
 
 ## TIPS
+Replying to operator request e.g. `/r 00,cancel`
+
 `Ctrl-n` brings up the menu in c3270
 
 Reattaching to a session in TSO console: `logon <username> reconnect`
@@ -72,6 +74,12 @@ or see http://www.jaymoseley.com/hercules/installMVS/addingDasdV7.htm
 
 To run a jcl file in the tk4/jcl folder, in the console run 
 `devinit 00c jcl/<<filename>> eof`
+
+### to kindof split printer output
+awk 'BEGIN { RS=""; f = "init.txt"; p=0 } /END   [A-Z]\*\*\*\*\n\f/ { p++ } { f = FILENAME "-page-" p ".txt" } { print > f }' prt00e.txt
+
+## Change Login Screen
+see jcl/netsol.jcl [from http://www.jaymoseley.com/hercules/faq/mvsfaq03.htm#SYSTEM020]
 
 ## Algol68C
 Download from https://algol68c.bitbucket.io/370/Algol68C_Release_1.3039.html/
