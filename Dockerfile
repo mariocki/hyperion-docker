@@ -1,4 +1,5 @@
-# syntax = docker/dockerfile:1.3-labs
+# syntax = docker/dockerfile:1.4.0
+
 FROM debian:sid-slim as build-stage
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -51,21 +52,17 @@ WORKDIR /build/
 
 RUN mkdir -p hyperion-docker_`cat /tmp/version.txt`/DEBIAN
 
-RUN <<EOF cat >> hyperion-docker_`cat /tmp/version.txt`/DEBIAN/control
-Package: hyperion-docker
-EOF
+RUN echo "Package: hyperion-docker" >> hyperion-docker_`cat /tmp/version.txt`/DEBIAN/control
 
 RUN echo "Version: `cat /tmp/version.txt`" >> hyperion-docker_`cat /tmp/version.txt`/DEBIAN/control
 
-RUN <<EOF2 cat >> hyperion-docker_`cat /tmp/version.txt`/DEBIAN/control
-Section: base
-Priority: optional
-Architecture: amd64
-Depends: libbz2-1.0, libzip4 
-Maintainer: Your Name <you@email.com>
-Description: Hyperion
- OS360 emulator from https://github.com/SDL-Hercules-390
-EOF2
+RUN echo $'Section: base\n\
+Priority: optional\n\
+Architecture: amd64\n\
+Depends: libbz2-1.0, libzip4\n\
+Maintainer: Your Name <you@email.com>\n\
+Description: Hyperion\n\
+ OS360 emulator from https://github.com/SDL-Hercules-390' >> hyperion-docker_`cat /tmp/version.txt`/DEBIAN/control
 
 RUN dpkg-deb --build hyperion-docker_`cat /tmp/version.txt`
 
