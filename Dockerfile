@@ -38,7 +38,7 @@ WORKDIR /build/hyperion
 
 RUN ./configure --enable-extpkgs=/build/gists
 
-RUN make -j
+RUN make
 
 RUN mkdir -p /build/hyperion-docker
 
