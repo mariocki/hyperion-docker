@@ -45,6 +45,8 @@ logoff
 ## TIPS
 Replying to operator request e.g. `/r 00,cancel`
 
+Get back into TSO/ISPF from the READY prompt: `ispf`
+
 `Ctrl-n` brings up the menu in c3270
 
 Reattaching to a session in TSO console: `logon <username> reconnect`
@@ -62,7 +64,7 @@ attach 250 3330 dasd/<<filename>
 ```
 or see http://www.jaymoseley.com/hercules/installMVS/addingDasdV7.htm
 
-To run a jcl file in the tk4/jcl folder, in the console run 
+To run a jcl file in the tk4/jcl folder, in the console run
 `devinit 00c jcl/<<filename>> eof`
 
 ### Split printer output (kindof)
@@ -75,6 +77,7 @@ see jcl/netsol.jcl [from http://www.jaymoseley.com/hercules/faq/mvsfaq03.htm#SYS
 ## Algol68C
 Download from https://algol68c.bitbucket.io/370/Algol68C_Release_1.3039.html/
 Then follow instructions on https://jmvdveer.home.xs4all.nl/en.post.algol-68-mvs.html#install and https://jmvdveer.home.xs4all.nl/en.post.algol-68-mvs-revisited.html
+
 ## Links
 * https://sdl-hercules-390.github.io/html/
 * https://kevindurant.be/2019/03/17/mom-part-1-setting-up-my-own-mainframe/
